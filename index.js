@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const display = document.getElementById("display");
 
     function appendToDisplay(input){
-        display.value += input; // always append ✅
+        display.value = display.value + input; // force append
     }
 
     function clearDisplay(){
@@ -12,9 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function calculate(){
         try{
-            display.value = eval(display.value);
+            display.value = String(eval(display.value)); // ensure string
         }
-        catch(error){
+        catch{
             display.value = "Error";
         }
     }
@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Keyboard support
     document.addEventListener("keydown", function(event) {
-        if (event.repeat) return;
 
         const key = event.key;
 
@@ -39,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
             appendToDisplay(".");
         }
         else if (key === "Enter") {
+            event.preventDefault(); // 🔥 IMPORTANT FIX
             calculate();
         }
         else if (key === "Backspace") {
