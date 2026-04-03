@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const display = document.getElementById("display");
 
     function appendToDisplay(input){
-        display.value += input;
+        display.value += input; // always append ✅
     }
 
     function clearDisplay(){
@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Make functions work with HTML buttons
     window.appendToDisplay = appendToDisplay;
     window.clearDisplay = clearDisplay;
     window.calculate = calculate;
@@ -30,32 +29,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const key = event.key;
 
-        // Numbers
         if (!isNaN(key)) {
             appendToDisplay(key);
         }
-
-        // Operators
         else if (["+", "-", "*", "/"].includes(key)) {
             appendToDisplay(key);
         }
-
-        // Decimal
         else if (key === ".") {
             appendToDisplay(".");
         }
-
-        // Enter = calculate
         else if (key === "Enter") {
             calculate();
         }
-
-        // Backspace = delete last
         else if (key === "Backspace") {
             display.value = display.value.slice(0, -1);
         }
-
-        // Escape = clear
         else if (key === "Escape") {
             clearDisplay();
         }
